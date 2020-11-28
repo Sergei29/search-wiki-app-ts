@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import ReactAutocomplete from "react-autocomplete";
+import { useSearch } from "./hooks/hooks";
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>("");
 
+  const { articles } = useSearch(value);
+
   return (
     <ReactAutocomplete
-      items={[
-        { id: "foo", label: "foo" },
-        { id: "bar", label: "bar" },
-        { id: "baz", label: "baz" },
-      ]}
+      items={articles}
       shouldItemRender={(item, value) =>
         item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
       }
