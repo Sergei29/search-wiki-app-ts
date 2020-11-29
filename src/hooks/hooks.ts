@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 const OPEN_SEARCH_ENDPOINT_URI =
   "https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=";
@@ -77,4 +77,16 @@ export const useDebounce = (value: any, delay: number = 500) => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+export const useSearchForm = () => {
+  const [searchValue, setSearchValue] = useState<string>("");
+
+  const onSearchChange = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) =>
+      setSearchValue(e.currentTarget.value),
+    []
+  );
+
+  return { searchValue, onSearchChange };
 };
