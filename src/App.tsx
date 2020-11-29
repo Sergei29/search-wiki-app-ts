@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ReactAutocomplete from "react-autocomplete";
-import { useSearch } from "./hooks/hooks";
+import { useSearch, useDebounce } from "./hooks/hooks";
 
 const App: React.FC = () => {
   const [value, setValue] = useState<string>("");
 
-  const { articles } = useSearch(value);
+  const { articles } = useSearch(useDebounce(value));
 
   return (
     <ReactAutocomplete
