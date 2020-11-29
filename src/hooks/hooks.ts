@@ -9,7 +9,7 @@ export type ArticlesStateType = {
   error: string;
 };
 
-export const useSearch = (query: string) => {
+export const useSearch = (query: string, minNumberOfResults: number = 10) => {
   const initialState: ArticlesStateType = {
     articles: [],
     status: "IDLE",
@@ -30,16 +30,16 @@ export const useSearch = (query: string) => {
     CancelToken.current = axios.CancelToken.source();
 
     axios
-      .get(`${OPEN_SEARCH_ENDPOINT_URI}${query}`, {
+      .get(`${OPEN_SEARCH_ENDPOINT_URI}${query}&limit=${minNumberOfResults}`, {
         cancelToken: CancelToken.current.token,
       })
       .then(({ data }) => {
-        const loadedArcicles = data[1].map((item: string, index: number) => ({
+        const loadedArticles = data[1].map((item: string, index: number) => ({
           id: data[3][index],
           label: item,
         }));
         setState(() => ({
-          articles: loadedArcicles,
+          articles: loadedArticles,
           status: "SUCCESS",
           error: "",
         }));
@@ -58,7 +58,7 @@ export const useSearch = (query: string) => {
     return () => {
       isMounted = false;
     };
-  }, [query]);
+  }, [query, minNumberOfResults]);
 
   return state;
 };
