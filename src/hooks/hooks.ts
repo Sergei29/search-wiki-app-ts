@@ -4,7 +4,7 @@ const OPEN_SEARCH_ENDPOINT_URI =
   "https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=";
 
 export type ArticlesStateType = {
-  articles: Record<string, string>[];
+  articles: { id: string; label: string }[];
   status: "IDLE" | "SUCCESS" | "ERROR";
   error: string;
 };

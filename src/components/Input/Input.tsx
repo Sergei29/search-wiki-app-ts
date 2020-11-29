@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss";
 
-type InputProps = {
+export type InputProps = {
   placeholder?: string;
   restProps?: any;
 };

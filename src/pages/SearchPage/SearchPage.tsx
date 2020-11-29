@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { useSearch } from "../../hooks/hooks";
 import Autocomplete from "../../components/Autocomplete";
 import Container from "../../components/Container";
+import ListItem from "../../components/ListItem";
 
 const SearchPage: React.FC<RouteComponentProps> = ({ location }) => {
   const queryParams = new URLSearchParams(location.search);
@@ -19,12 +20,8 @@ const SearchPage: React.FC<RouteComponentProps> = ({ location }) => {
       return <p>Error occured: {error}</p>;
     }
 
-    return articles.map(({ id, label }) => (
-      <div key={id}>
-        <a href={id} target="_blank" rel="noreferrer">
-          {label}
-        </a>
-      </div>
+    return articles.map((article) => (
+      <ListItem key={article.id} {...article} />
     ));
   };
 
