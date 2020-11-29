@@ -1,6 +1,7 @@
 import React from "react";
 import ReactAutocomplete from "react-autocomplete";
 import Input from "../Input";
+import "./style.scss";
 
 type AutocompleteProps = {
   articles: Record<string, any>[];
